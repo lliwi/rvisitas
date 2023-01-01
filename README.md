@@ -5,8 +5,8 @@ La aplicación se ha desarrollado en flask por lo que es mutipltafoma. Se apoya 
 # Features
 - Formulario de registro 
 - Panel de administración
-- .Gestión de usuarios
-- .Consulta de registros.
+- Gestión de usuarios
+- Consulta de registros.
 
 # Instalación 
 ## Servidor físico 
@@ -15,8 +15,8 @@ Instalamos los requisitos de python. 
 pip install –r requirements.txt 
 ```
 # Variables de entorno 
-
-| Variable                                 | Descripción                                                  | 
+```text 
+| Variable                                  | Descripción                                                 | 
 |------------------------------------------|̣̣̣--------------------------------------------------------------|
 |SENDGRID_API_KEY= API KEY                 | Es necesario disponer de una cuenta (gratuita) de SENGRID    |
 |                                          | para él envió de correos electrónicos y generar una API KEY. |
@@ -29,13 +29,12 @@ pip install –r requirements.txt 
 |COMPANY_NAME=COMPANY NAME                 | Nombre de las empresa.                                       |
 |FLASK_APP=app                             | Nombre de la aplicación (app)                                |
 |----------------------------------------------------------------------------------------------------------
-
+```
 Iniciamos la base de datos con el comando: 
 
 ```bash 
 flask init-db 
 ```
-
 Este comando creara las tablas en la base de dados indicada en las variables de entorno y creará las credenciales por defecto (usuario: admin, contraseña: password) 
 Se recomienda crear un nuevo usurio e eliminar el existente durante el primer acceso. 
 Una vez inicializada la base de datos podemos iniciar el servidor:+ 
@@ -46,9 +45,8 @@ Una vez iniciado podemos acceder a la url del servidor. 
 http://localhost:8000 
 
 ## Docker 
-
-La imagen para docker esta disponible en docker hub https://hub.docker.com/r/lliwi/rvisitas 
-En el repositorio se proporciona el fichero Dockerfile para poder generar la imagen en local y actualizar la visión de python. 
+La imagen para docker esta disponible en docker hub https://hub.docker.com/r/lliwi/rvisitas.
+En este repositorio se proporciona el fichero Dockerfile para poder generar la imagen en local y actualizar la visión de python. 
 Se proporciona también el fichero docker-compose.yaml de ejemplo para poder iniciar el servicio mysql para pruebas, adminier, para la gestión de la mase de datos mysql (eliminarlo en servidores de producción) y el servicio web rvisitas. 
 Para iniciarlo lo podemos realizar ejecutando: 
 ```bash 
