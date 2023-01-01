@@ -9,7 +9,7 @@ Panel de administración
 .Consulta de registros.
 
 # Instalación 
-Servidor físico 
+## Servidor físico 
 Instalamos los requisitos de python. 
 ```bash 
 pip install –r requirements.txt 
@@ -44,7 +44,7 @@ gunicorn –w 4 –b 0.0.0.0:8000 app:create_app() 
 Una vez iniciado podemos acceder a la url del servidor. 
 http://localhost:8000 
 
-# Docker 
+## Docker 
 
 La imagen para docker esta disponible en docker hub https://hub.docker.com/r/lliwi/rvisitas 
 En el repositorio se proporciona el fichero Dockerfile para poder generar la imagen en local y actualizar la visión de python. 
