@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title%}{% endblock %}
+
+{% block content%}
+<header>
+    <div class="dropdown">
+        <span>|Menu|</span>
+        <div class="dropdown-content">
+            <a class="button " href="/"> <img src="{{ url_for('static', filename='images/home.png') }}"
+                    width="20px" /></a>
+        </div>
+    </div>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" width="150px" />
+</header>
+<div class="center">
+    <div class="registry">
+        <form method="post" action="/">
+            <label name="dni">{{ text['dni'] }}</label>
+            <input name="dni" type="text" required />
+
+            <label name="name">{{ text['name'] }}</label>
+            <input name="name" type="text" required />
+
+            <label name="surname">{{ text['surname'] }}</label>
+            <input name="surname" type="text" required />
+
+            <label name="email">{{ text['email'] }}</label>
+            <input name="email" type="email" required />
+
+            <label name="host">{{ text['host'] }}</label>
+            <input name="host" type="text" required />
+            <div>
+                <a class="gdpr" href="/?file=GDPR" target="_blank" name="gdpr">{{ text['gdpr'] }}</a>
+                <input class="resize-left" name="gdpr" type="checkbox" required />
+            </div>
+            <button class="button resize" type="submit">{{ text['send'] }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

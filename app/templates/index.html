@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title%}{% endblock %}
+
+{% block content %}
+<header>
+    <div class="dropdown">
+        <span>|Menu|</span>
+        <div class="dropdown-content">
+            <a class="button " href="/auth/login"> <img src="{{ url_for('static', filename='images/admin.png') }}"
+                    width="20px" /></a>
+        </div>
+    </div>
+    <div class="logo">
+        <h3>Bienvenido a {{ company }} | Welcome to {{ company }}</h3>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" height="100px" />
+    </div>
+</header>
+
+<div class="lang">
+    <ul>
+        <li><a href="/?lang=ES" class="button">ES</a></li>
+        <li><a href="/?lang=EN" class="button">EN</a></li>
+    </ul>
+</div>
+
+<div class="center">
+    <img src="{{ url_for('static', filename='images/reg.png') }}" width="400px">
+</div>
+
+
+
+{% endblock %}

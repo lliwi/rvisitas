@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}{% endblock %} </h1>
+{% endblock %}
+
+{% block content %}
+
+{% include 'auth/base-header.html' %}
+
+<div class="center">
+    <h1>{{ text['stitle3'] }}</h1>
+    <div class="registry">
+        <form method="post">
+            <label for="date_from">{{ text['date1'] }}</label>
+            <input type="date" name="date_from" id="date_from" required />
+
+            <label for="date_to">{{ text['date2'] }}</label>
+            <input type="date" name="date_to" id="date_to" required />
+
+            <input class="button resize" type="submit" value="{{ text['find'] }}" />
+        </form>
+    </div>
+</div>
+<div class="center">
+    <div class="report-div">
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>{{ text['name'] }}</th>
+                    <th>{{ text['surname'] }}</th>
+                    <th>{{ text['email'] }}</th>
+                    <th>{{ text['idcard'] }}</th>
+                    <th>{{ text['host'] }}</th>
+                    <th>GDPR</th>
+                    <th>{{ text['date'] }}</th>
+                </tr>
+            </thead>
+            {% for reg in result %}
+            <tr>
+                <td>{{ reg['name'] }}</td>
+                <td>{{ reg['surname'] }}</td>
+                <td>{{ reg['email'] }}</td>
+                <td>{{ reg['dni'] }}</td>
+                <td>{{ reg['host'] }}</td>
+                <td>{{ reg['gdpr'] }}</td>
+                <td>{{ reg['date'].strftime('%m/%d/%Y %H:%M') }}</td>
+            </tr>
+            {% if not loop.last%}
+            {%endif%}
+            {%endfor%}
+        </table>
+    </div>
+</div>
+<div class="center-right">
+    <a class="button resize-right" href="{{ url_for('static', filename='tmp/report.csv') }}"> {{ text['download'] }}</a>
+</div>
+
+{% endblock %}

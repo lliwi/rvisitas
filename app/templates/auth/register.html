@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'auth/base-header.html' %}
+
+<div class="center">
+    <h1>{{ text['stitle1'] }}</h1>
+    <div class="user-div">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>{{ text['name'] }}</th>
+                    <th>{{ text['surname'] }}</th>
+                    <th>{{ text['username'] }}</th>
+                    <th>{{ text['actions'] }}</th>
+                </tr>
+            </thead>
+            {% for user in users %}
+            <tr>
+                <td>{{ user['name'] }}</td>
+                <td>{{ user['surname'] }}</td>
+                <td>{{ user['user'] }}</td>
+                <td><a class="table-button" href="{{ url_for('auth.delete', id=user['id']) }}">{{ text['delete'] }}</a>
+                </td>
+            </tr>
+            {% if not loop.last%}
+            {%endif%}
+            {%endfor%}
+        </table>
+    </div>
+</div>
+
+<div class="center">
+    <h1>{{ text['stitle2'] }}</h1>
+    <div class="registry">
+        <form method="post">
+            <label for="name">{{ text['name'] }}</label>
+            <input name="name" id="name" required />
+
+            <label for="surname">{{ text['surname'] }}</label>
+            <input name="surname" id="surname" required />
+
+            <label for="username">{{ text['username'] }}</label>
+            <input name="username" id="username" required />
+
+            <label for="password">{{ text['password'] }}</label>
+            <input type="password" name="password" id="password" required />
+
+            <input class="button resize" type="submit" value="{{ text['add'] }}" />
+        </form>
+    </div>
+</div>
+<p class="error">{{ error }}</p>
+<div class="center-right"></div>
+{% endblock %}

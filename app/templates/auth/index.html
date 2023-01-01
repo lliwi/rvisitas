@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% include 'auth/base-header.html' %}
+
+<div class="center">
+    <img src="{{ url_for('static', filename='images/admin-panel.png') }}" width="400px"
+        style="opacity:0.4;filter:alpha(opacity=40)" />
+</div>
+
+
+
+{% endblock %}

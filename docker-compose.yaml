@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  rvisitas:
+    ports:
+      - "8000:8000"
+    image: rvisitas
+    environment:
+      - SENDGRID_API_KEY=
+      - FROM_EMAIL=
+      - FLASK_DATABASE_HOST=
+      - FLASK_DATABASE_USER=root
+      - FLASK_DATABASE_PASSWORD=example
+      - FLASK_DATABASE=visitas
+      - SECRET_KEY=yourseccret
+      - COMPANY_NAME=
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
