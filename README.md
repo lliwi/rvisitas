@@ -3,10 +3,10 @@ Aplicación para registrar las visitas que acceden a una oficina, registrar sus 
 La aplicación se ha desarrollado en flask por lo que es mutipltafoma. Se apoya en una base de datos mysql para almacenar los registros y genera un csv para consultarlos.
 
 # Features
-Formulario de registro 
-Panel de administración
-.Gestión de usuarios
-.Consulta de registros.
+- Formulario de registro 
+- Panel de administración
+- .Gestión de usuarios
+- .Consulta de registros.
 
 # Instalación 
 ## Servidor físico 
@@ -15,6 +15,7 @@ Instalamos los requisitos de python. 
 pip install –r requirements.txt 
 ```
 # Variables de entorno 
+
 | Variable                                 | Descripción                                                  | 
 |------------------------------------------|̣̣̣--------------------------------------------------------------|
 |SENDGRID_API_KEY= API KEY                 | Es necesario disponer de una cuenta (gratuita) de SENGRID    |
