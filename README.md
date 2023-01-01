@@ -13,7 +13,7 @@ Panel de administración
 Instalamos los requisitos de python. 
 ```bash 
 pip install –r requirements.txt 
-``` 
+```
 # Variables de entorno 
 | Variable                                 | Descripción                                                  | 
 |------------------------------------------|̣̣̣--------------------------------------------------------------|
@@ -33,14 +33,14 @@ Iniciamos la base de datos con el comando: 
 
 ```bash 
 flask init-db 
-``` 
+```
 
 Este comando creara las tablas en la base de dados indicada en las variables de entorno y creará las credenciales por defecto (usuario: admin, contraseña: password) 
 Se recomienda crear un nuevo usurio e eliminar el existente durante el primer acceso. 
 Una vez inicializada la base de datos podemos iniciar el servidor:+ 
 ```bash 
 gunicorn –w 4 –b 0.0.0.0:8000 app:create_app() 
-``` 
+```
 Una vez iniciado podemos acceder a la url del servidor. 
 http://localhost:8000 
 
@@ -52,18 +52,18 @@ Se proporciona también el fichero docker-compose.yaml de ejemplo para poder ini
 Para iniciarlo lo podemos realizar ejecutando: 
 ```bash 
 docker-compose –f docker-compose.yaml up –d 
-``` 
+```
 Crear la base de datos de adminier http://localhost:8080 
 Ejecutaremos el siguiente comando para iniciar la base de datos: 
 ```bash 
 docker exec -t CONTAINER_NAME flask init-db 
-``` 
+```
 Una vez iniciado podemos acceder a la url del servidor. 
 http://localhost:8000 
 Iniciamos la base de datos con el comando: 
 ```bash 
 flask init-db 
-``` 
+```
 Este comando creara las tablas en la base de dados indicada en las variables de entorno y creará las credenciales por defecto (usuario: admin, contraseña: password) 
 Se recomienda crear un nuevo usurio e eliminar el existente durante el primer acceso. 
 Una vez inicializada la base de datos podemos iniciar el servidor:+ 
