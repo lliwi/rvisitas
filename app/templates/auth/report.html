@@ -43,7 +43,9 @@
                 <td>{{ reg['email'] }}</td>
                 <td>{{ reg['dni'] }}</td>
                 <td>{{ reg['host'] }}</td>
-                <td>{{ reg['gdpr'] }}</td>
+                {% if reg['gdpr'] == 1 %}
+                <td>OK</td>
+                {% endif%}
                 <td>{{ reg['date'].strftime('%m/%d/%Y %H:%M') }}</td>
             </tr>
             {% if not loop.last%}
@@ -53,7 +55,7 @@
     </div>
 </div>
 <div class="center-right">
-    <a class="button resize-right" href="/auth/report?file=report"> {{ text['download'] }}</a>
+    <a class="button" href="/auth/report?file=report"> {{ text['download'] }}</a>
 
 </div>
 

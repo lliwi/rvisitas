@@ -32,11 +32,11 @@ def index():
     printer = current_app.config['PRINTER_NAME']
 
     if request.method == 'POST':
-        name = request.form['name']
-        surname = request.form['surname']
-        email = request.form['email']
-        dni = request.form['dni']
-        host = request.form['host']
+        name = request.form['name'].capitalize()
+        surname = request.form['surname'].capitalize()
+        email = request.form['email'].lower()
+        dni = request.form['dni'].upper()
+        host = request.form['host'].capitalize()
         gdpr = request.form['gdpr']
 
         if gdpr == 'on':

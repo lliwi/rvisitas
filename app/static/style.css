@@ -108,24 +108,14 @@ div ul li {
 }
 
 .resize {
-    align-self: flex-end;
+
     margin-top: 20px;
 }
 
 .resize-left {
     display: inline;
-    width: 20px;
-    transform: translateY(5px);
-
+    transform: translateX(-150px);
 }
-
-a.resize-right {
-    display: inline;
-    width: 20px;
-    transform: translateY(5px);
-
-}
-
 
 .gdpr {
     text-decoration: none;
@@ -135,16 +125,21 @@ a.resize-right {
 
 
 .center {
+    display: grid;
+    place-content: center;
+    width: 100%;
     color: darkgrey;
     margin: 25px;
-    transform: translateX(30%);
+
 }
 
 .center-right {
+    display: grid;
+    place-content: center;
+    width: 100%;
     color: darkgrey;
-    margin: 25px;
-    transform: translateX(60%);
     padding-bottom: 100px;
+    margin: 25px;
 
 }
 
@@ -158,9 +153,9 @@ a.resize-right {
 
 
 .registry form {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
+    display: grid;
+    place-content: center;
+    width: 100%;
     margin-bottom: 15px;
 
 
@@ -170,6 +165,7 @@ a.resize-right {
     font-family: 'Raleway', sans-serif;
     border: 1;
     height: 30px;
+    width: 300px;
     padding: 5px 15px;
     border-radius: 10px;
     box-shadow: 0 1px 5px #ddd;

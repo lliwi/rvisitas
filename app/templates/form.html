@@ -17,19 +17,21 @@
     <div class="registry">
         <form method="post" action="/">
             <label name="dni">{{ text['dni'] }}</label>
-            <input name="dni" type="text" required />
+            <input name="dni" type="text" autocomplete="off" spellcheck="false" required
+                onkeyup="this.value = this.value.toUpperCase();" />
 
             <label name="name">{{ text['name'] }}</label>
-            <input name="name" type="text" required />
+            <input name="name" type="text" autocomplete="off" spellcheck="false" autocapitalize="word" required />
 
             <label name="surname">{{ text['surname'] }}</label>
-            <input name="surname" type="text" required />
+            <input name="surname" type="text" autocomplete="off" spellcheck="false" required />
 
             <label name="email">{{ text['email'] }}</label>
-            <input name="email" type="email" required />
+            <input name="email" type="email" autocomplete="off" spellcheck="false"
+                onkeyup="this.value = this.value.toLowerCase();" required />
 
             <label name="host">{{ text['host'] }}</label>
-            <input name="host" type="text" required />
+            <input name="host" type="text" autocomplete="off" spellcheck="false" required />
             <div>
                 <a class="gdpr" href="/?file=GDPR" target="_blank" name="gdpr">{{ text['gdpr'] }}</a>
                 <input class="resize-left" name="gdpr" type="checkbox" required />
