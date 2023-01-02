@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 from flask import (
-    Blueprint, flash, g, render_template, request, url_for, session, redirect, current_app, make_response
+    Blueprint, flash, g, render_template, request, url_for, session, redirect, current_app, make_response, send_file
 )
 
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -201,7 +201,7 @@ def to_excel(data):
     except:
         pass
 
-    pd.DataFrame(data).to_csv('app/static//tmp/report.csv')
+    pd.DataFrame(data).to_csv('app/static/tmp/report.csv')
 
 
 @bp.route('/report', methods=['GET', 'POST'])
@@ -209,6 +209,7 @@ def to_excel(data):
 def report():
     company = current_app.config['COMPANY_NAME']
     lang = request.cookies.get('lang')
+    file = request.args.get('file')
 
     if request.method == 'POST':
         date_to = request.form['date_to']
@@ -231,6 +232,9 @@ def report():
             return render_template('auth/report.html', text=text_ES, result=result, company=company)
 
     else:
+        if file == 'report':
+            return send_file('static/tmp/report.csv', as_attachment=True)
+
         if lang == 'EN':
             return render_template('auth/report.html', text=text_EN, company=company)
         else:
