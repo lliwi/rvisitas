@@ -53,7 +53,8 @@
     </div>
 </div>
 <div class="center-right">
-    <a class="button resize-right" href="{{ url_for('static', filename='tmp/report.csv') }}"> {{ text['download'] }}</a>
+    <a class="button resize-right" href="/auth/report?file=report"> {{ text['download'] }}</a>
+
 </div>
 
 {% endblock %}
