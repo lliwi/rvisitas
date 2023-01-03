@@ -14,7 +14,10 @@ def create_app():
         DATABASE_USER=os.environ.get('FLASK_DATABASE_USER'),
         DATABASE=os.environ.get('FLASK_DATABASE'),
         COMPANY_NAME=os.environ.get('COMPANY_NAME'),
-        PRINTER_NAME=os.environ.get('PRINTER_NAME'),
+        SMTP_HOST=os.environ.get('SMTP_HOST'),
+        SMTP_PORT=os.environ.get('SMTP_PORT'),
+        SMTP_USER=os.environ.get('SMTP_USER'),
+        SMTP_PASSWORD=os.environ.get('SMTP_PASSWORD')
     )
 
     from . import db

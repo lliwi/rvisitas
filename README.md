@@ -15,11 +15,18 @@ Instalamos los requisitos de python. 
 pip install –r requirements.txt 
 ```
 # Variables de entorno 
+
+Para las notificaciones podemos hacer uso de [sendgrid](https://sendgrid.com/) o de un servidor SMTP si se añade la API key de sendgrid no es necesario proporcionar los datos del servidor SMTP y se se proporcionan los del SMTP no será necesario proporcionar la API key de sendgrid. EN caso de no proporcionar ninguno de ellos en sistema no enviará notificaciones.
+
 ```text 
 | Variable                                  | Descripción                                                 | 
 |------------------------------------------|̣̣̣--------------------------------------------------------------|
 |SENDGRID_API_KEY= API KEY                 | Es necesario disponer de una cuenta (gratuita) de SENGRID    |
 |                                          | para él envió de correos electrónicos y generar una API KEY. |
+|SMTP_HOST= SMTP HOST                      | Host del servidor SMTP.                                      |
+|SMTP_PORT= SMTP PORT                      | Puerto del servidor SMTP                                     |
+|SMTP_USER= SMTP USER                      | Usuario para el servidor SMTP                                |
+|SMTP_PASSWORD= SMTP PASSWORD              | Contraseña para el servidor SMTP.                            |
 |FROM_EMAIL= SENDGRID EMAIL                | El correo electrónico que hayamos validado en SENDGRID.      |
 |FLASK_DATABASE_HOST= MYSQL HOST           | IP de la base de datos mysql.                                |
 |FLASK_DATABASE_USER= MYSQL USER           | Usuario de la base de datos mysql.                           |

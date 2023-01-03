@@ -7,11 +7,15 @@ from app.text import *
 import subprocess
 import sendgrid
 from sendgrid.helpers.mail import Mail, Email, To, Content
+import smtplib
+import ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 bp = Blueprint('reg-visitas', __name__, url_prefix='/')
 
 
-def send_mail(to, subject, company, name, surname, html_content):
+def send_mail_endgrid(to, subject, company, name, surname, html_content):
     sg = sendgrid.SendGridAPIClient(api_key=current_app.config['SENDGRID_KEY'])
     from_email = Email(current_app.config['FROM_EMAIL'])
     to_email = To(to, substitutions={
@@ -25,11 +29,31 @@ def send_mail(to, subject, company, name, surname, html_content):
     print(response)
 
 
+def send_mail_smtp(to, subject, company, name, surname, html_content):
+    host = current_app.config['SMTP_HOST']
+    port = current_app.config['SMTP_PORT']
+    user = current_app.config['SMTP_USER']
+    password = current_app.config['SMTP_PASSWORD']
+    from_email = current_app.config['FROM_EMAIL']
+    html_content = html_content.replace("-company-", company)
+    html_content = html_content.replace("-name-", name)
+    html_content = html_content.replace("-surname-", surname)
+
+    message = MIMEText(html_content, "html")
+    message['Subject'] = subject
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(host, port, context=context) as server:
+        server.login(user, password)
+        server.sendmail(
+            from_email, to, message.as_string()
+        )
+
+
 @bp.route('/', methods=['GET', 'POST'])
 def index():
     lang = request.cookies.get('lang')
     company = current_app.config['COMPANY_NAME']
-    printer = current_app.config['PRINTER_NAME']
 
     if request.method == 'POST':
         name = request.form['name'].capitalize()
@@ -54,8 +78,14 @@ def index():
         else:
             content = mail_content_ES
 
-        send_mail(email, company + ' GDPR', company,
-                  name, surname, content)
+        if current_app.config['SENDGRID_KEY'] != "":
+            send_mail_endgrid(email, company + ' GDPR',
+                              company, name, surname, content)
+        elif current_app.config['SMTP_HOST'] != "":
+            send_mail_smtp(email, company + ' GDPR',
+                           company, name, surname, content)
+        else:
+            pass
 
         return render_template('index.html', company=company)
 
