@@ -54,6 +54,7 @@ def send_mail_smtp(to, subject, company, name, surname, html_content):
 def index():
     lang = request.cookies.get('lang')
     company = current_app.config['COMPANY_NAME']
+    from_email = current_app.config['FROM_EMAIL']
 
     if request.method == 'POST':
         name = request.form['name'].capitalize()
@@ -78,16 +79,20 @@ def index():
         else:
             content = mail_content_ES
 
-        if current_app.config['SENDGRID_KEY'] != "":
+        if current_app.config['SENDGRID_KEY'] != None:
+            print(current_app.config['SENDGRID_KEY'])
             send_mail_endgrid(email, company + ' GDPR',
                               company, name, surname, content)
-        elif current_app.config['SMTP_HOST'] != "":
+        elif current_app.config['SMTP_HOST'] != None:
             send_mail_smtp(email, company + ' GDPR',
                            company, name, surname, content)
         else:
             pass
 
-        return render_template('index.html', company=company)
+        if lang == 'EN':
+            return render_template('registered.html', text=text_EN)
+        else:
+            return render_template('registered.html', text=text_ES)
 
     else:
         lang = request.args.get('lang')
@@ -104,7 +109,11 @@ def index():
             resp.set_cookie('lang', 'EN')
             return resp
         elif file == 'GDPR':
-            return render_template('gdpr.html')
+            lang = request.cookies.get('lang')
+            if lang == 'EN':
+                return render_template('gdpr_en.html', company=company, email_from=from_email)
+            else:
+                return render_template('gdpr_es.html', company=company, email_from=from_email)
         else:
             return render_template('index.html', company=company)
 

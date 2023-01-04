@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<img src="{{ url_for('static', filename='images/logo.png') }}" width="150px" />
+<br>
+<h3>Information and Consent Form pursuant to Article 13 of Regulation 679/2016 and national personal data protection
+    regulations</h3>
+<p>Pursuant to Article 13 of the European Regulation relating to personal data protection (hereinafter “GDPR”),
+    {{ company }}, in its capacity as Data Controller pursuant to Article 24 of GDPR, hereby provides the following
+    information.</p>
+<ol type="a">
+    <li>The Controller for data processing is {{ company }}, which may be contacted via <a
+            href="mailto:{{ from_email }}" class="button">{{ from_email }}</a>.</li>
+    <li>The Data protection officer (DPO) may be contacted via <a href="mailto:{{ from_email }}" class="button">{{
+            from_email }}</a>.</li>
+    <li>At your entrance you will be asked to provide some personal data (name, surname, Company) aa well as an identity
+        document: those data will be collected, recorded and stored for the purpose of protecting company assets and for
+        occupational health &amp; safety laws and regulations.</li>
+    <li>Your data shall be stored for the duration necessary for the purposes of the processing in paper and electronic
+        archives located at the Company&#39;s registered office, but in any case for a period not exceeding three months
+        from the date of their provision.</li>
+    <li>The Controller shall record/register images using company video surveillance systems, in the legitimate interest
+        of security reasons and guaranteeing the safety of personnel and company assets. Video surveillance footage
+        shall be kept for at most one month. The data may be processed by employees of the Data Processor specifically
+        authorized by the Data Processor, as well as by the Company managing the security camera system;</li>
+    <li>Images can be processed without previous consent, since they are processed in order to pursue the legitimate
+        interest of the Controller or of a third party through the collection of evidence or to protect people and
+        property with respect to possible aggressions, robberies, assaults, damages, acts of vandalism or for the
+        purpose of fire prevention or occupational safety (Article 6, paragraph 1., letter f), RGPD).</li>
+    <li>The processing of data is optional, but the refusal to provide them will prevent the access to the premises;
+    </li>
+    <li>Your data shall be processed lawfully and with the utmost confidentiality pursuant to Article 5 of the GDPR;
+        processing shall be conducted using suitable electronic means that guarantee the confidentiality and the safety
+        of the data.</li>
+    <li>Pursuant to Articles 15 (Access Rights), 16 (Right to Rectification), 17 (Right to Deletion), 18 (Right to limit
+        processing), 20 (Right to portability), 21 (Right to object), 22 (Right to object to automatic processing), 77
+        (Right to file complaints with the Data Protection Authority) of the GDPR, the data subject may exercise its
+        rights by e-mailing <a href="mailto:{{ from_email }}" class="button">{{ from_email }}</a>.</li>
+    <li>By signing the entry pass – that is delivered with this information – you will confirm that you have read the
+        information provided and will consent to the collection and processing of the data as indicated above.</li>
+</ol>
+<p><strong>
+        The Data Controller
+        <br>
+        {{ company }}
+    </strong>
+</p>
+<p>
+    Entry pass (if any):
+</p>
+<p>
+    2) I declare that I have read the information referred to in the informative note that has been delivered to me at
+    my entry and I give my consent to the processing of my personal data as indicated therein.
+</p>

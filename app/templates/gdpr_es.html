@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<img src="{{ url_for('static', filename='images/logo.png') }}" width="150px" />
+<br>
+<h3>Formulario de Información y Consentimiento de conformidad con el artículo 13 del Reglamento 679/2016 y la normativa
+    nacional de protección de datos personales</h3>
+<p>En virtud del art. 13 del Reglamento Europeo en materia de protección de datos personales (en adelante también
+    RGPD),
+    {{ company }}, por ser el Responsable del tratamiento ex art. 24 RGPD, comunicará lo siguiente:</p>
+<ol type="a">
+    <li>El Responsable del tratamiento es {{ company }}, que puede ser contactado escribiendo a <a
+            href="mailto:{{ from_email }}" class="button">{{ from_email }}</a></li>
+    <li>El Delegado de protección de datos podrá ser contacto escribiendo a la dirección <a
+            href="mailto:{{ from_email }}" class="button">{{ from_email }}</a></li>
+    </li>
+    <li>A su entrada se le requerirá que brinde algunos datos personales (nombre, apellido, empresa) y su documento
+        de
+        identidad, que se recogerán, registrarán y archivarán para los fines de tutela del patrimonio empresarial y
+        de
+        la seguridad de las personas presentes en el interior de los locales, con el fin de perseguir un interés
+        legítimo del Titular o de un tercero.
+        Dichos datos se conservarán durante el tiempo necesario, a los fines del tratamiento, en archivos impresos y
+        electrónicos presentes en el domicilio social de la Sociedad pero, de todos modos, por un período no
+        superior a
+        tres meses desde el tratamiento;</li>
+    <li>El Responsable se encarga, además, de detectar/grabar las imágenes mediante sistemas de cámaras de
+        vigilancia,
+        para la seguridad y tutela de las personas y del patrimonio de la empresa. Dichas grabaciones se conservarán
+        por
+        por un plazo máximo de 1 mes. Los datos podrán ser tratados por empleados del Responsable específicamente
+        encargados por el Responsable del tratamiento, como así también por la Sociedad que gestiona el sistema de
+        cámaras de seguridad;</li>
+    <li>La obtención de las imágenes puede llevarse a cabo sin el consentimiento pues se realiza con el fin de
+        perseguir
+        el interés legítimo del Titular o de un tercero a través de la recopilación de medios de prueba o para
+        tutelar a
+        las personas y bienes respecto a posibles agresiones, robos, asaltos, daños, actos de vandalismo o para
+        fines de
+        prevención de incendios o de seguridad laboral (art. 6, apar. 1., letra. f), RGPD).</li>
+    <li>El tratamiento de los datos es opcional, pero la eventual negativa de otorgarlos impedirá el acceso al
+        inmueble;
+    </li>
+    <li>Los datos serán tratados de modo lícito, según la corrección y con la máxima confidencialidad; el
+        tratamiento se
+        realizará con medios informáticos y/o impresos adecuados para garantizar la confidencialidad y la seguridad
+        de
+        estos;</li>
+    <li>Como Interesado del tratamiento, se le reconocen los derechos enunciados en el art. 15-21 del Reglamento, es
+        decir, poder solicitar al Responsable del tratamiento: el acceso a los datos personales; la corrección de
+        los
+        datos personales; la cancelación de los datos personales; la limitación del tratamiento de los datos
+        personales;
+        oponerse a su tratamiento, además, el derecho de transferibilidad de los datos, en los límites y en los
+        casos
+        previstos por el Reglamento. Para ejercer sus derechos podrá escribir a la dirección de correo electrónico
+        <a href="mailto:{{ from_email }}" class="button">{{ from_email }}</a>.
+    </li>
+    Se precisa que, en cualquier momento, usted podrá, además, ejercer el derecho de reclamación ante la Autoridad
+    de
+    control competente en virtud del art. 77 del RGDP.
+    <li>A través de la suscripción del pase de entrada - que se entrega junto con la presente - confirmará haber
+        leído
+        las informaciones mencionadas y otorgará su consentimiento para la recogida y el procesamiento de los datos
+        como
+        se indica aquí arriba.</li>
+</ol>
+<p><strong>
+        El Responsable del tratamiento
+        <br>
+        {{ company }}
+    </strong>
+</p>
+<p>
+    *Ingresar el pase:
+</p>
+<p>
+    2) declaro haber leído las informaciones citadas en la nota informativa que me ha sido entregada al momento de
+    la
+    entrada y doy mi consentimiento al tratamiento de mis datos personales según lo indicado en la misma.
+</p>

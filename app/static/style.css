@@ -108,21 +108,26 @@ div ul li {
 }
 
 .resize {
-
     margin-top: 20px;
 }
 
-.resize-left {
-    display: inline;
-    transform: translateX(-150px);
+
+div.gdpr {
+    display: flex;
+    align-items: flex-start;
+
+}
+
+a.gdpr {
+    text-decoration: none;
+    color: var(--secondary-color);
+
+
 }
 
 .gdpr {
-    text-decoration: none;
-    color: var(--secondary-color);
-    margin-right: 20px;
+    width: 100px;
 }
-
 
 .center {
     display: grid;
