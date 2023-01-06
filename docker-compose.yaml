@@ -3,7 +3,7 @@ services:
   rvisitas:
     ports:
       - "8000:8000"
-    image: rvisitas
+    image: lliwi/rvisitas:base
     environment:
       - SENDGRID_API_KEY=
       - FROM_EMAIL=
@@ -17,6 +17,9 @@ services:
       - SMTP_PORT=
       - SMTP_USER=
       - SMTP_PASSWORD=
+    volumes:
+      - ./app_/code/app
+    
 
   db:
     image: mysql
