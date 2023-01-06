@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}{% endblock %} </h1>
+{% endblock %}
+
+{% block content %}
+<script>
+    var timer = setTimeout(function () {
+        window.location = '/auth/monitor'
+    }, 31000);
+</script>
+{% include 'auth/base-header.html' %}
+
+
+<div class="center">
+    <h1>{{ text['stitle4'] }} {{ today }} </h1>
+    <table class="report-table">
+        <thead>
+            <tr>
+                <th>{{ text['name'] }}</th>
+                <th>{{ text['surname'] }}</th>
+                <th>{{ text['vcompany'] }}</th>
+                <th>{{ text['host'] }}</th>
+                <th>{{ text['date'] }}</th>
+            </tr>
+        </thead>
+        {% for reg in result %}
+        <tr>
+            <td>{{ reg['name'] }}</td>
+            <td>{{ reg['surname'] }}</td>
+            <td>{{ reg['company'] }}</td>
+            <td>{{ reg['host'] }}</td>
+            <td>{{ reg['date'].strftime('%m/%d/%Y %H:%M') }}</td>
+        </tr>
+        {% if not loop.last%}
+        {%endif%}
+        {%endfor%}
+    </table>
+
+</div>
+
+
+{% endblock %}

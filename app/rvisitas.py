@@ -59,6 +59,7 @@ def index():
     if request.method == 'POST':
         name = request.form['name'].capitalize()
         surname = request.form['surname'].capitalize()
+        vcompany = request.form['vcompany']
         email = request.form['email'].lower()
         dni = request.form['dni'].upper()
         host = request.form['host'].capitalize()
@@ -69,8 +70,8 @@ def index():
 
         db, c = get_db()
         c.execute(
-            'insert into visitas (name, surname, email, dni, host, gdpr) values (%s, %s,%s, %s, %s, %s)',
-            (name, surname, email, dni, host, gdpr)
+            'insert into visitas (name, surname, company, email, dni, host, gdpr) values (%s, %s, %s,%s, %s, %s, %s)',
+            (name, surname, vcompany, email, dni, host, gdpr)
         )
         db.commit()
 

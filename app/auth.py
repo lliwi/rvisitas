@@ -4,6 +4,7 @@ from datetime import timedelta
 import csv
 import pandas as pd
 import os
+from datetime import date
 
 from flask import (
     Blueprint, flash, g, render_template, request, url_for, session, redirect, current_app, make_response, send_file
@@ -28,7 +29,7 @@ def login():
         db, c = get_db()
         error = None
         c.execute(
-            'select * from users where user = %s', (username,)
+            'select id, user, password from users where user = %s', (username,)
         )
 
         user = c.fetchone()
@@ -195,9 +196,15 @@ def delete():
 
 
 def to_excel(data):
+
+    isdir = os.path.isdir('app/static/tmp/')
+    if isdir == False:
+        os.mkdir('app/static/tmp/')
+
     try:
-        if os.path('app/static//tmp/report.csv'):
-            os.remove('app/static//tmp/report.csv')
+        isFile = os.path.isfile('app/static/tmp/report.csv')
+        if isFile:
+            os.remove('app/static/tmp/report.csv')
     except:
         pass
 
@@ -220,7 +227,7 @@ def report():
             date_to = date_to + timedelta(days=1)
 
         db, c = get_db()
-        c.execute('select * from visitas where date between %s and %s',
+        c.execute('select name, surname, company, email, dni, host, gdpr, date  from visitas where date between %s and %s',
                   (date_from, date_to))
         result = c.fetchall()
 
@@ -239,6 +246,25 @@ def report():
             return render_template('auth/report.html', text=text_EN, company=company)
         else:
             return render_template('auth/report.html', text=text_ES, company=company)
+
+
+@bp.route('/monitor', methods=['GET'])
+@ login_required
+def monitor():
+    company = current_app.config['COMPANY_NAME']
+    lang = request.cookies.get('lang')
+    today = date.today()
+    today = datetime.strptime(str(today), "%Y-%m-%d")
+
+    db, c = get_db()
+    c.execute('select name, surname, company, email, dni, host, gdpr, date  from visitas where date between %s and %s',
+              (today, today + timedelta(days=1)))
+    result = c.fetchall()
+
+    if lang == 'EN':
+        return render_template('auth/monitor.html', text=text_EN, result=result, company=company, today=today.date())
+    else:
+        return render_template('auth/monitor.html', text=text_ES, result=result, company=company, today=today.date())
 
 
 @ bp.route('/logout')

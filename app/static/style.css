@@ -58,7 +58,6 @@ header {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    transform: translateX(-20px);
 }
 
 .lang-select {
@@ -127,6 +126,7 @@ a.gdpr {
 
 .gdpr {
     width: 100px;
+    margin-top: 10px
 }
 
 .center {

@@ -16,6 +16,7 @@ instructions = [
             id INT PRIMARY KEY AUTO_INCREMENT,
             name TEXT NOT NULL,
             surname TEXT NOT NULL,
+            company TEXT NOT NULL,
             email TEXT NOT NULL,
             dni TEXT NOT NULL,
             host TEXT NOT NULL,
