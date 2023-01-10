@@ -21,7 +21,8 @@ def send_mail_endgrid(to, subject, company, name, surname, html_content):
     to_email = To(to, substitutions={
         "-company-": company,
         "-name-": name,
-        "-surname-": surname
+        "-surname-": surname,
+        "-from_email-": from_email
     })
 
     mail = Mail(from_email, to_email, subject, html_content=html_content)
@@ -39,6 +40,7 @@ def send_mail_smtp(to, subject, company, name, surname, html_content):
     html_content = html_content.replace("-company-", company)
     html_content = html_content.replace("-name-", name)
     html_content = html_content.replace("-surname-", surname)
+    html_content = html_content.replace("-from_email-", from_email)
 
     message = MIMEText(html_content, "html")
     message['Subject'] = subject
