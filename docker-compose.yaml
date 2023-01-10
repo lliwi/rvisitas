@@ -17,8 +17,9 @@ services:
       - SMTP_PORT=
       - SMTP_USER=
       - SMTP_PASSWORD=
+      - TLS=
     volumes:
-      - ./app_/code/app
+      - ./app:/code/app
     
 
   db:

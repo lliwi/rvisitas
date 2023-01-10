@@ -267,7 +267,7 @@ def monitor():
         return render_template('auth/monitor.html', text=text_ES, result=result, company=company, today=today.date())
 
 
-@ bp.route('/logout')
+@bp.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))

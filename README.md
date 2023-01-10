@@ -28,6 +28,7 @@ Para las notificaciones podemos hacer uso de [sendgrid](https://sendgrid.com/) o
 |SMTP_USER= SMTP USER                      | Usuario para el servidor SMTP                                |
 |SMTP_PASSWORD= SMTP PASSWORD              | Contraseña para el servidor SMTP.                            |
 |FROM_EMAIL= FROM EMAIL                    | El correo electrónico usado para el envio (SENGRID o SMTP)   |
+|TSL=                                      | True o Fase según si nuestro sevidor SMTP.                   |
 |FLASK_DATABASE_HOST= MYSQL HOST           | IP de la base de datos mysql.                                |
 |FLASK_DATABASE_USER= MYSQL USER           | Usuario de la base de datos mysql.                           |
 |FLASK_DATABASE_PASSWORD= MYSQL PASSWORD   | Contraseña de la base de datos mysql.                        |

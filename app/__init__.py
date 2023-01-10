@@ -17,7 +17,8 @@ def create_app():
         SMTP_HOST=os.environ.get('SMTP_HOST'),
         SMTP_PORT=os.environ.get('SMTP_PORT'),
         SMTP_USER=os.environ.get('SMTP_USER'),
-        SMTP_PASSWORD=os.environ.get('SMTP_PASSWORD')
+        SMTP_PASSWORD=os.environ.get('SMTP_PASSWORD'),
+        TLS=os.environ.get('TLS')
     )
 
     from . import db

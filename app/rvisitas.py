@@ -34,6 +34,7 @@ def send_mail_smtp(to, subject, company, name, surname, html_content):
     port = current_app.config['SMTP_PORT']
     user = current_app.config['SMTP_USER']
     password = current_app.config['SMTP_PASSWORD']
+    tls = current_app.config['TLS']
     from_email = current_app.config['FROM_EMAIL']
     html_content = html_content.replace("-company-", company)
     html_content = html_content.replace("-name-", name)
@@ -42,12 +43,16 @@ def send_mail_smtp(to, subject, company, name, surname, html_content):
     message = MIMEText(html_content, "html")
     message['Subject'] = subject
 
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(host, port, context=context) as server:
-        server.login(user, password)
-        server.sendmail(
-            from_email, to, message.as_string()
-        )
+    if tls == True:
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(host, port, context=context) as server:
+            server.login(user, password)
+            server.sendmail(
+                from_email, to, message.as_string()
+            )
+    else:
+        with smtplib.SMTP(host, port) as server:
+            server.sendmail(from_email, to, message)
 
 
 @bp.route('/', methods=['GET', 'POST'])
