@@ -18,9 +18,8 @@ instructions = [
             surname TEXT NOT NULL,
             company TEXT NOT NULL,
             email TEXT NOT NULL,
-            dni TEXT NOT NULL,
             host TEXT NOT NULL,
-            date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            date DATETIME NOT NULL ,
             gdpr BOOLEAN NOT NULL
         );
     """,

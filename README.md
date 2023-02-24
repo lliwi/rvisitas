@@ -36,6 +36,7 @@ Para las notificaciones podemos hacer uso de [sendgrid](https://sendgrid.com/) o
 |SECRET_KEY=YOUERSECRET                    | Secreto para las sesiones http (valor aleatorio).            |
 |COMPANY_NAME=COMPANY NAME                 | Nombre de las empresa.                                       |
 |FLASK_APP=app                             | Nombre de la aplicación (app)                                |
+|USE_NGROK= True                           | Activa el menú para Ngrok                                    |
 |----------------------------------------------------------------------------------------------------------
 ```
 Iniciamos la base de datos con el comando: 
@@ -73,9 +74,16 @@ flask init-db 
 ```
 Este comando creara las tablas en la base de dados indicada en las variables de entorno y creará las credenciales por defecto (usuario: admin, contraseña: password) 
 Se recomienda crear un nuevo usurio e eliminar el existente durante el primer acceso. 
-Una vez inicializada la base de datos podemos iniciar el servidor:+ 
+Una vez inicializada la base de datos podemos iniciar el servidor:
 ```bash 
 gunicorn –w 4 –b 0.0.0.0:8000 app:create_app() 
 ```
 Una vez iniciado podemos acceder a la url del servidor. 
 http://localhost:8000 
+
+## Ngrok
+Si estamos haciendo uso de Ngrok para poder dar acessos temporales desde el exterior de nuestra red tenemos que activar nuestra cuenta en el contenedor.
+Ejecutaremos el siguinete comando con el token proporcionado por Ngrok.
+```bash
+ngrok authtoken 1lN1HJKtzRb5uFeLBRY5fBPoULg_6zGkDdxRjDJdZPubFgrFq
+```

@@ -18,7 +18,9 @@ def create_app():
         SMTP_PORT=os.environ.get('SMTP_PORT'),
         SMTP_USER=os.environ.get('SMTP_USER'),
         SMTP_PASSWORD=os.environ.get('SMTP_PASSWORD'),
-        TLS=os.environ.get('TLS')
+        TLS=os.environ.get('TLS'),
+        #BASE_URL="http://localhost:8000",
+        USE_NGROK=os.environ.get("USE_NGROK")
     )
 
     from . import db

@@ -4,6 +4,16 @@
 {% block content %}
 
 {% include 'auth/base-header.html' %}
+{% if ngrok is defined %}
+<div class="ngrok">
+    <a class="button " href="/auth/ngrok">Ngrok link</a>
+            {% for tunel in ngrok %}
+                <p>{{ tunel }}</p>
+        {% endfor %}
+    {% else %}
+       <p>---</p>
+</div>
+{% endif %}
 
 <div class="center">
     <img src="{{ url_for('static', filename='images/admin-panel.png') }}" width="400px"

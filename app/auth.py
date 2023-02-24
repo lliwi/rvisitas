@@ -4,6 +4,7 @@ from datetime import timedelta
 import csv
 import pandas as pd
 import os
+import sys
 from datetime import date
 
 from flask import (
@@ -14,6 +15,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
 from app.text import text_EN, text_ES
+
+def init_webhooks(base_url):
+    # Update inbound traffic via APIs to use the public-facing ngrok URL
+    pass
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -109,16 +114,59 @@ def index():
         "title": "Admin panel "
     }
 
+    if current_app.config['USE_NGROK'] is True:
+        #get ngrok tunnels
+        from pyngrok import ngrok
+        tunnels = ngrok.get_tunnels()
+    else:
+        tunnels = []
+
     if lang == 'EN':
         resp = make_response(render_template(
-            'auth/index.html', text=text_EN, company=company))
+            'auth/index.html', text=text_EN, company=company, ngrok=tunnels))
         resp.set_cookie('lang', 'EN')
         return resp
     else:
         resp = make_response(render_template(
-            'auth/index.html', text=text_ES, company=company))
+            'auth/index.html', text=text_ES, company=company, ngrok=tunnels))
         resp.set_cookie('lang', 'ES')
         return resp
+
+@bp.route('/ngrok')
+@login_required
+def ngrok():
+    lang = request.args.get('lang')
+    company = current_app.config['COMPANY_NAME']
+
+    text_ES = {
+        "title": "Panel de administración  "
+    }
+    text_EN = {
+        "title": "Admin panel "
+    }
+
+    from pyngrok import ngrok
+    tunnels = ngrok.get_tunnels()
+    print(len(tunnels))
+    if len(tunnels) < 3 :
+        port = sys.argv[sys.argv.index("--port") + 1] if "--port" in sys.argv else 8000
+        public_url = ngrok.connect(port, bind_tls=True).public_url
+
+        init_webhooks(public_url)
+
+    tunnels = ngrok.get_tunnels()
+
+    if lang == 'EN':
+        resp = make_response(render_template(
+            'auth/index.html', text=text_EN, company=company, ngrok=tunnels))
+        resp.set_cookie('lang', 'EN')
+        return resp
+    else:
+        resp = make_response(render_template(
+            'auth/index.html', text=text_ES, company=company, ngrok=tunnels))
+        resp.set_cookie('lang', 'ES')
+        return resp
+
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -227,7 +275,7 @@ def report():
             date_to = date_to + timedelta(days=1)
 
         db, c = get_db()
-        c.execute('select name, surname, company, email, dni, host, gdpr, date  from visitas where date between %s and %s',
+        c.execute('select name, surname, company, email, host, gdpr, date  from visitas where date between %s and %s',
                   (date_from, date_to))
         result = c.fetchall()
 
@@ -257,7 +305,7 @@ def monitor():
     today = datetime.strptime(str(today), "%Y-%m-%d")
 
     db, c = get_db()
-    c.execute('select name, surname, company, email, dni, host, gdpr, date  from visitas where date between %s and %s',
+    c.execute('select name, surname, company, email, host, gdpr, date  from visitas where date between %s and %s',
               (today, today + timedelta(days=1)))
     result = c.fetchall()
 

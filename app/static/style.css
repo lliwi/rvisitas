@@ -88,6 +88,10 @@ div ul li {
     margin-bottom: 5px;
 }
 
+.resize {
+    margin-top: 20px;
+}
+
 .table-button {
     display: block;
     background-color: var(--primary-color);
@@ -106,8 +110,20 @@ div ul li {
     background-color: var(--primary-color-light)
 }
 
-.resize {
-    margin-top: 20px;
+.ngrok {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: right;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.ngrok a {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: right;
+    width: fit-content;
+    margin-top: 10px;
 }
 
 
@@ -117,18 +133,18 @@ div.gdpr {
 
 }
 
-a.gdpr {
-    text-decoration: none;
-    color: var(--secondary-color);
-
-
-}
 
 .gdpr {
-    width: 100px;
     margin-top: 10px
 }
 
+a.gdpr {
+    text-decoration: none;
+    color: var(--secondary-color);
+    width: fit-content;
+    margin-right: 50px;
+
+}
 .center {
     display: grid;
     place-content: center;
@@ -170,7 +186,7 @@ a.gdpr {
     font-family: 'Raleway', sans-serif;
     border: 1;
     height: 30px;
-    width: 300px;
+    width:  auto;
     padding: 5px 15px;
     border-radius: 10px;
     box-shadow: 0 1px 5px #ddd;

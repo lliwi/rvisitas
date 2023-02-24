@@ -4,6 +4,7 @@ from flask import (
 from app.db import get_db
 from app.text import *
 
+from datetime import datetime
 import subprocess
 import sendgrid
 from sendgrid.helpers.mail import Mail, Email, To, Content
@@ -63,22 +64,34 @@ def index():
     company = current_app.config['COMPANY_NAME']
     from_email = current_app.config['FROM_EMAIL']
 
+    external = False
+    url = request.url_root.split('.')
+    if url[1] == 'ngrok':
+        external = True
+
     if request.method == 'POST':
         name = request.form['name'].capitalize()
         surname = request.form['surname'].capitalize()
         vcompany = request.form['vcompany']
         email = request.form['email'].lower()
-        dni = request.form['dni'].upper()
         host = request.form['host'].capitalize()
         gdpr = request.form['gdpr']
+        
+        if "date" in request.form:
+            date = request.form['date']
+        else:
+            date =  datetime.now()
 
         if gdpr == 'on':
             gdpr = True
+        
+        
+        
 
         db, c = get_db()
         c.execute(
-            'insert into visitas (name, surname, company, email, dni, host, gdpr) values (%s, %s, %s,%s, %s, %s, %s)',
-            (name, surname, vcompany, email, dni, host, gdpr)
+            'insert into visitas (name, surname, company, email, host, date, gdpr) values (%s, %s, %s,%s, %s, %s, %s)',
+            (name, surname, vcompany, email, host, date, gdpr)
         )
         db.commit()
 
@@ -108,12 +121,12 @@ def index():
 
         if lang == 'ES':
             resp = make_response(render_template(
-                'form.html', text=text_ES, company=company))
+                'form.html', text=text_ES, company=company, external=external))
             resp.set_cookie('lang', 'ES')
             return resp
         elif lang == 'EN':
             resp = make_response(render_template(
-                'form.html', text=text_EN, company=company))
+                'form.html', text=text_EN, company=company, external=external))
             resp.set_cookie('lang', 'EN')
             return resp
         elif file == 'GDPR':
