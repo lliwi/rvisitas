@@ -114,7 +114,7 @@ def index():
         "title": "Admin panel "
     }
 
-    if current_app.config['USE_NGROK'] is True:
+    if current_app.config['USE_NGROK']:
         #get ngrok tunnels
         from pyngrok import ngrok
         tunnels = ngrok.get_tunnels()
