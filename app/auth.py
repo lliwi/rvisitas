@@ -34,7 +34,7 @@ def login():
         db, c = get_db()
         error = None
         c.execute(
-            'select id, user, password from users where user = %s', (username,)
+            'select id, user, password from users where user = %s', (username.lower(),)
         )
 
         user = c.fetchone()
@@ -197,7 +197,7 @@ def register():
         if error is None:
             c.execute(
                 'insert into users (name, surname, user, password) values (%s, %s, %s, %s)',
-                (name, surname, username, generate_password_hash(password))
+                (name, surname, username.lower(), generate_password_hash(password))
             )
             db.commit()
 
