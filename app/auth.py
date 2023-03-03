@@ -50,7 +50,6 @@ def login():
             return redirect(url_for('auth.index'))
 
         flash(error)
-        print('si, error')
         if lang == 'EN':
             resp = make_response(render_template(
                 'auth/login.html', error=error, text=text_EN, company=company))
@@ -106,6 +105,7 @@ def login_required(view):
 def index():
     lang = request.args.get('lang')
     company = current_app.config['COMPANY_NAME']
+    ngrok = current_app.config['USE_NGROK']
 
     text_ES = {
         "title": "Panel de administración  "
@@ -114,21 +114,30 @@ def index():
         "title": "Admin panel "
     }
 
-    if current_app.config['USE_NGROK']:
-        #get ngrok tunnels
-        from pyngrok import ngrok
-        tunnels = ngrok.get_tunnels()
-    else:
-        tunnels = []
+  
+    try:
+        if ngrok:
+            tunels = []
+            #get ngrok tunnels
+            from pyngrok import ngrok
+            ngrok_tunels = ngrok.get_tunnels()
+            for tunel in ngrok_tunels:
+                tunels.append(tunel.public_url)
+        else:
+            tunels = []
+       
+    except:
+            tunels = []
+    
 
     if lang == 'EN':
         resp = make_response(render_template(
-            'auth/index.html', text=text_EN, company=company, ngrok=tunnels))
+            'auth/index.html', text=text_EN, company=company,tunels=tunels,ngrok=ngrok))
         resp.set_cookie('lang', 'EN')
         return resp
     else:
         resp = make_response(render_template(
-            'auth/index.html', text=text_ES, company=company, ngrok=tunnels))
+            'auth/index.html', text=text_ES, company=company,tunels=tunels,ngrok=ngrok))
         resp.set_cookie('lang', 'ES')
         return resp
 
@@ -137,6 +146,7 @@ def index():
 def ngrok():
     lang = request.args.get('lang')
     company = current_app.config['COMPANY_NAME']
+    ngrok = current_app.config['USE_NGROK']
 
     text_ES = {
         "title": "Panel de administración  "
@@ -146,28 +156,39 @@ def ngrok():
     }
 
     from pyngrok import ngrok
-    tunnels = ngrok.get_tunnels()
-    print(len(tunnels))
-    if len(tunnels) < 3 :
+
+    if len(ngrok.get_tunnels()) < 3 :
         port = sys.argv[sys.argv.index("--port") + 1] if "--port" in sys.argv else 8000
         public_url = ngrok.connect(port, bind_tls=True).public_url
-
         init_webhooks(public_url)
 
-    tunnels = ngrok.get_tunnels()
+    tunels=[]
+    ngrok_tunels = ngrok.get_tunnels()
+    for tunel in ngrok_tunels:
+        tunels.append(tunel.public_url)
 
     if lang == 'EN':
         resp = make_response(render_template(
-            'auth/index.html', text=text_EN, company=company, ngrok=tunnels))
+            'auth/index.html', text=text_EN, company=company,tunels=tunels,ngrok=ngrok))
         resp.set_cookie('lang', 'EN')
         return resp
     else:
         resp = make_response(render_template(
-            'auth/index.html', text=text_ES, company=company, ngrok=tunnels))
+            'auth/index.html', text=text_ES, company=company,tunels=tunels,ngrok=ngrok))
         resp.set_cookie('lang', 'ES')
         return resp
 
+@bp.route('/ngrok_delete')
+@login_required
+def ngrok_delete():
+    company = current_app.config['COMPANY_NAME']
+    lang = request.cookies.get('lang')
+    tunel = request.args.get('tunel')
 
+    from pyngrok import ngrok
+    ngrok.disconnect(ngrok.disconnect(tunel))
+    #resp = make_response(render_template('auth/index.html', text=text_ES, company=company))
+    return redirect('/auth')
 
 @bp.route('/register', methods=['GET', 'POST'])
 @login_required

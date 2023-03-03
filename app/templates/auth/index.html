@@ -4,14 +4,17 @@
 {% block content %}
 
 {% include 'auth/base-header.html' %}
-{% if ngrok is defined %}
+{% if ngrok %}
 <div class="ngrok">
     <a class="button " href="/auth/ngrok">Ngrok link</a>
-            {% for tunel in ngrok %}
-                <p>{{ tunel }}</p>
+    <table>
+            {% for tunel in tunels %}
+            <tr>
+                <td>{{ tunel }}</td>
+                <td><a class="table-button" href="{{ url_for('auth.ngrok_delete', tunel = tunel) }}"> x </a></td>
+            </tr>
         {% endfor %}
-    {% else %}
-       <p>---</p>
+    </table>
 </div>
 {% endif %}
 
