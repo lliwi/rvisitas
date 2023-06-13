@@ -3,11 +3,11 @@ services:
   rvisitas:
     ports:
       - "8000:8000"
-    image: lliwi/rvisitas:ngrok
+    image: lliwi/rvisitas:latest
     environment:
       - SENDGRID_API_KEY=
       - FROM_EMAIL=
-      - FLASK_DATABASE_HOST=
+      - FLASK_DATABASE_HOST=db
       - FLASK_DATABASE_USER=root
       - FLASK_DATABASE_PASSWORD=example
       - FLASK_DATABASE=visitas

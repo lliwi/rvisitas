@@ -12,6 +12,7 @@
     <h1>{{ text['stitle3'] }}</h1>
     <div class="registry">
         <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <label for="date_from">{{ text['date1'] }}</label>
             <input type="date" name="date_from" id="date_from" required />
 

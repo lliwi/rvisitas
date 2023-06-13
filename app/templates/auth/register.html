@@ -38,6 +38,7 @@
     <h1>{{ text['stitle2'] }}</h1>
     <div class="registry">
         <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <label for="name">{{ text['name'] }}</label>
             <input name="name" id="name" required />
 

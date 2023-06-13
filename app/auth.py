@@ -22,6 +22,12 @@ def init_webhooks(base_url):
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+@bp.after_request
+def add_security_headers(resp):
+    resp.headers['Content-Security-Policy']='default-src \'self\''
+    resp.headers['X-Content-Type-Options'] = 'nosniff'
+    resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    return resp
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():

@@ -27,6 +27,7 @@
 <div class="center">
     <div class="registry">
         <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <label for="username">{{text['username']}}</label>
             <input name="username" id="username" required />
             <label for="password">{{text['password']}}</label>

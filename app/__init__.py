@@ -1,6 +1,7 @@
 import os
 from flask import Flask
-
+from flask_wtf.csrf import CSRFProtect
+csrf = CSRFProtect()
 
 def create_app():
     app = Flask(__name__)
@@ -20,16 +21,28 @@ def create_app():
         SMTP_PASSWORD=os.environ.get('SMTP_PASSWORD'),
         TLS=os.environ.get('TLS'),
         #BASE_URL="http://localhost:8000",
-        USE_NGROK=os.environ.get("USE_NGROK")
+        USE_NGROK=os.environ.get("USE_NGROK"),
+        
     )
+
+    app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+)
 
     from . import db
     db.init_app(app)
+    
+    
+    from . import csrf
+    csrf.init_app(app)
 
     from . import rvisitas
     app.register_blueprint(rvisitas.bp)
 
     from . import auth
     app.register_blueprint(auth.bp)
+
 
     return app

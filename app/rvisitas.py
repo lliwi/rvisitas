@@ -13,6 +13,7 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+
 bp = Blueprint('reg-visitas', __name__, url_prefix='/')
 
 
@@ -28,7 +29,7 @@ def send_mail_endgrid(to, subject, company, name, surname, html_content):
 
     mail = Mail(from_email, to_email, subject, html_content=html_content)
     response = sg.client.mail.send.post(request_body=mail.get())
-    print(response)
+    #print(response)
 
 
 def send_mail_smtp(to, subject, company, name, surname, html_content):
@@ -57,6 +58,14 @@ def send_mail_smtp(to, subject, company, name, surname, html_content):
         with smtplib.SMTP(host, port) as server:
             server.sendmail(from_email, to, message)
 
+@bp.after_request
+def add_security_headers(resp):
+    resp.headers['Content-Security-Policy']='default-src: \'self\'; font-src: \'fonts.googleapis.com\';'
+    resp.headers['X-Content-Type-Options'] = 'nosniff'
+    resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    resp.set_cookie('username', 'flask', secure=True, httponly=True, samesite='Lax')
+    return resp
+
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
@@ -65,9 +74,12 @@ def index():
     from_email = current_app.config['FROM_EMAIL']
 
     external = False
-    url = request.url_root.split('.')
-    if url[1] == 'ngrok':
-        external = True
+    try:
+        url = request.url_root.split('.')
+        if url[1] == 'ngrok':
+            external = True
+    except:
+        pass
 
     if request.method == 'POST':
         name = request.form['name'].capitalize()
@@ -111,9 +123,11 @@ def index():
             pass
 
         if lang == 'EN':
-            return render_template('registered.html', text=text_EN)
+            resp =  render_template('registered.html', text=text_EN)
+            return resp
         else:
-            return render_template('registered.html', text=text_ES)
+            resp =  render_template('registered.html', text=text_ES)
+            return resp
 
     else:
         lang = request.args.get('lang')
@@ -132,10 +146,14 @@ def index():
         elif file == 'GDPR':
             lang = request.cookies.get('lang')
             if lang == 'EN':
-                return render_template('gdpr_en.html', company=company, email_from=from_email)
+                resp =  render_template('gdpr_en.html', company=company, email_from=from_email)
+                return resp
             else:
-                return render_template('gdpr_es.html', company=company, email_from=from_email)
+                resp =  render_template('gdpr_es.html', company=company, email_from=from_email)
+                return resp
         else:
-            return render_template('index.html', company=company)
+            resp = render_template('index.html', company=company)
+            return resp
 
-    return render_template('index.html', company=company)
+    resp =  render_template('index.html', company=company)
+    return resp

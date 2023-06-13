@@ -18,6 +18,7 @@
 <div class="center">
     <div class="registry">
         <form method="post" action="/">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <label name="name">{{ text['name'] }}</label>
             <input name="name" type="text" autocomplete="off" spellcheck="false" autocapitalize="word" required />
