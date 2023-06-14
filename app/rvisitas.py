@@ -12,10 +12,10 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import re
 
 
 bp = Blueprint('reg-visitas', __name__, url_prefix='/')
-
 
 def send_mail_endgrid(to, subject, company, name, surname, html_content):
     sg = sendgrid.SendGridAPIClient(api_key=current_app.config['SENDGRID_KEY'])
@@ -73,6 +73,7 @@ def index():
     company = current_app.config['COMPANY_NAME']
     from_email = current_app.config['FROM_EMAIL']
 
+
     external = False
     try:
         url = request.url_root.split('.')
@@ -82,11 +83,11 @@ def index():
         pass
 
     if request.method == 'POST':
-        name = request.form['name'].capitalize()
-        surname = request.form['surname'].capitalize()
-        vcompany = request.form['vcompany']
-        email = request.form['email'].lower()
-        host = request.form['host'].capitalize()
+        name = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '', request.form['name'].capitalize())
+        surname = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['surname'].capitalize())
+        vcompany = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['vcompany'])
+        email = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['email'].lower())
+        host = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['host'].capitalize())
         gdpr = request.form['gdpr']
         
         if "date" in request.form:

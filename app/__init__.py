@@ -29,7 +29,8 @@ def create_app():
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE='Lax',
-)
+    )
+
 
     from . import db
     db.init_app(app)

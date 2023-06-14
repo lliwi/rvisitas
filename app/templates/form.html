@@ -21,20 +21,20 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <label name="name">{{ text['name'] }}</label>
-            <input name="name" type="text" autocomplete="off" spellcheck="false" autocapitalize="word" required />
+            <input name="name" type="text" autocomplete="off" spellcheck="false" autocapitalize="word" pattern="[^()/><\][\\\x22,;:'#$%&=|?¿!¡]+"" required />
 
             <label name="surname">{{ text['surname'] }}</label>
-            <input name="surname" type="text" autocomplete="off" spellcheck="false" required />
+            <input name="surname" type="text" autocomplete="off" spellcheck="false" pattern="[^()/><\][\\\x22,;:'#$%&=|?¿!¡]+"" required />
 
             <label name="vcompany">{{ text['vcompany'] }}</label>
-            <input name="vcompany" type="vcompany" autocomplete="off" spellcheck="false" required />
+            <input name="vcompany" type="vcompany" autocomplete="off" spellcheck="false" pattern="[^()/><\][\\\x22,;:'#$%&=|?¿!¡]+"" required />
 
             <label name="email">{{ text['email'] }}</label>
             <input name="email" type="email" autocomplete="off" spellcheck="false"
-                onkeyup="this.value = this.value.toLowerCase();" required />
+                onkeyup="this.value = this.value.toLowerCase();" pattern="[^()/><\][\\\x22,;:'#$%&=|?¿!¡]+"" required />
 
             <label name="host">{{ text['host'] }}</label>
-            <input name="host" type="text" autocomplete="off" spellcheck="false" required />
+            <input name="host" type="text" autocomplete="off" spellcheck="false" pattern="[^()/><\][\\\x22,;:'#$%&=|?¿!¡]+"" required />
 
             {% if external %}
             <label for="date">{{ text['date'] }}</label>
