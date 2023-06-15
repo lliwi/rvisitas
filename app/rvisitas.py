@@ -12,7 +12,7 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import re
+import html
 
 
 bp = Blueprint('reg-visitas', __name__, url_prefix='/')
@@ -83,11 +83,11 @@ def index():
         pass
 
     if request.method == 'POST':
-        name = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '', request.form['name'].capitalize())
-        surname = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['surname'].capitalize())
-        vcompany = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['vcompany'])
-        email = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['email'].lower())
-        host = re.sub(r'[[^()/><\][\\\x22,;:\'#$%&=|?¿!¡]+"]', '',request.form['host'].capitalize())
+        name = html.escape(request.form['name'].capitalize())
+        surname = html.escape(request.form['surname'].capitalize())
+        vcompany = html.escape(request.form['vcompany'])
+        email = html.escape(request.form['email'].lower())
+        host = html.escape(request.form['host'].capitalize())
         gdpr = request.form['gdpr']
         
         if "date" in request.form:
