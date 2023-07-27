@@ -272,18 +272,18 @@ def delete():
 
 def to_excel(data):
 
-    isdir = os.path.isdir('app/static/tmp/')
+    isdir = os.path.isdir('app/auth/')
     if isdir == False:
-        os.mkdir('app/static/tmp/')
+        os.mkdir('app/auth/')
 
     try:
-        isFile = os.path.isfile('app/static/tmp/report.csv')
+        isFile = os.path.isfile('app/auth/report.csv')
         if isFile:
-            os.remove('app/static/tmp/report.csv')
+            os.remove('app/auth/report.csv')
     except:
         pass
 
-    pd.DataFrame(data).to_csv('app/static/tmp/report.csv')
+    pd.DataFrame(data).to_csv('app/auth/report.csv')
 
 
 @bp.route('/report', methods=['GET', 'POST'])
@@ -315,7 +315,7 @@ def report():
 
     else:
         if file == 'report':
-            return send_file('static/tmp/report.csv', as_attachment=True)
+            return send_file('auth/report.csv', as_attachment=True)
 
         if lang == 'EN':
             return render_template('auth/report.html', text=text_EN, company=company)
